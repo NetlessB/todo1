@@ -1,7 +1,7 @@
 <template>
   <div class="ga-node">
     <div class="ga-node-head">
-      <span>{{index+1}}- {{ ga.name }}</span>
+      <span>{{index ? index + 1 + " -" : ''}} {{ ga.name }}</span>
       <button @click="removeNode">❌</button>
       <button @click="addChild">➕ Sub-Ga</button>
     </div>
@@ -23,7 +23,7 @@ import type { Ga } from '@/stores/models/ga.model'
 import { usePendingGa } from '@/stores/pendingGa'
 
 const props = defineProps<{
-  index: number
+  index?: number
   ga: Ga
 }>()
 
