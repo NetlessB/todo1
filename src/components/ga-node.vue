@@ -1,7 +1,7 @@
 <template>
   <div class="ga-node">
     <div class="ga-node-head">
-      <span>{{index ? index + 1 + " -" : ''}} {{ ga.name }}</span>
+      <span>{{index !== undefined ? index + 1 + " -" : ''}} {{ ga.name }}</span>
       <button @click="removeNode">❌</button>
       <button @click="addChild">➕ Sub-Ga</button>
     </div>
