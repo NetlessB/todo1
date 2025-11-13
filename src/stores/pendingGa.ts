@@ -10,6 +10,29 @@ export const usePendingGa = defineStore('pendingGa', () => {
     }),
   )
 
+  let onChangeCallback: ((newVal: Ga) => void) | null = null
+
+  function setOnChange(cb: (newVal: Ga) => void): void {
+    if (typeof cb !== 'function') {
+      throw new Error('setOnChange expects a function')
+    }
+    onChangeCallback = cb
+  }
+
+  function clearOnChange(): void {
+    onChangeCallback = null
+  }
+
+  function onChange(newVal: Ga): void {
+    if (!onChangeCallback) return
+
+    try {
+      onChangeCallback(newVal)
+    } catch (err) {
+      console.error('Error in onChange callback:', err)
+    }
+  }
+
   function buildGa(name: string, subGa?: Ga[]): Ga {
     if (typeof name !== 'string' || name.trim() === '') {
       throw new Error('Invalid Ga name: must be a non-empty string')
@@ -52,6 +75,9 @@ export const usePendingGa = defineStore('pendingGa', () => {
     if (invalidIndex) at.subGa.push(theGa)
     else at.subGa.splice(index!, 0, theGa)
 
+    // Change happened → notify
+    onChange(rootOfGa.value)
+
     return null
   }
 
@@ -69,6 +95,10 @@ export const usePendingGa = defineStore('pendingGa', () => {
     }
 
     of.splice(index, 1)
+
+    // Change happened → notify
+    onChange(rootOfGa.value)
+
     return null
   }
 
@@ -89,6 +119,7 @@ export const usePendingGa = defineStore('pendingGa', () => {
     const err = removeGaAtIndexOf(indexOfGa, at.subGa)
     if (err) return new Error(`Failed to remove Ga "${name}" from "${at.name}": ${err.message}`)
 
+    // notify is already done inside removeGaAtIndexOf
     return null
   }
 
@@ -118,6 +149,9 @@ export const usePendingGa = defineStore('pendingGa', () => {
 
       const gaData = data.record as Ga
       rootOfGa.value = reactive(gaData)
+
+      // Loading data is a change
+      onChange(rootOfGa.value)
 
       return null
     } catch (err: unknown) {
@@ -161,5 +195,8 @@ export const usePendingGa = defineStore('pendingGa', () => {
     removeGaAt,
     initFromJsonBin,
     updateJsonBin,
+    setOnChange,
+    clearOnChange,
+    onChange,
   }
 })
