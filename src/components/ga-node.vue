@@ -50,10 +50,9 @@ function addChild() {
 
 <style lang="css" scoped>
 .ga-node {
-  padding: 0.75rem 0.25rem;
-  margin-left: 20px;
-  border-left: 1px solid #ccc;
-  padding-left: 10px;
+  padding: 0.75rem 0.25rem 0.0rem 0.25rem;
+  margin-left: 30px;
+  border-left: 2px solid #ccc;
 }
 
 .ga-node-head {
