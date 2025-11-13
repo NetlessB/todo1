@@ -9,12 +9,11 @@ const savingGa = ref<boolean>(false)
 const saveMessage = ref<string | null>(null)
 const saveError = ref<string | null>(null)
 const isDirty = ref<boolean>(false)
-const autoSave = ref<boolean>(false) // کنترل Auto Save
+const autoSave = ref<boolean>(false)
 
 pendingGa.setOnChange(async () => {
   isDirty.value = true
 
-  // اگر Auto Save فعال است، مستقیم ذخیره کن
   if (autoSave.value && !savingGa.value) {
     await saveGa()
   }
