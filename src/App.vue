@@ -60,7 +60,7 @@ onMounted(loadPendingGa)
     <span v-if="saveMessage" style="color: green">{{ saveMessage }}</span>
     <span v-if="saveError" style="color: red">{{ saveError }}</span>
   </div>
-  <GaNodeComponent v-if="!loadingPendingGa" :ga="pendingGa.rootOfGa" />
+  <GaNodeComponent v-if="!loadingPendingGa" :ga="pendingGa.rootOfGa" :index="0" />
 </template>
 
 <style scoped></style>
