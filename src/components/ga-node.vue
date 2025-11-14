@@ -1,7 +1,7 @@
 <template>
   <div class="ga-node">
     <div class="ga-node-head">
-      <span>{{ ga.name }}</span>
+      <span>{{index !== undefined ? index + 1 + " -" : ''}} {{ ga.name }}</span>
       <button @click="removeNode">❌</button>
       <button @click="addChild">➕ Sub-Ga</button>
     </div>
@@ -9,6 +9,7 @@
     <transition-group name="fade" tag="div" v-if="ga.subGa.length > 0">
       <GaNode
         v-for="(child, idx) in ga.subGa"
+        :index="idx"
         :key="child.name"
         :ga="child"
         @remove="handleRemoveChild(idx)"
@@ -22,6 +23,7 @@ import type { Ga } from '@/stores/models/ga.model'
 import { usePendingGa } from '@/stores/pendingGa'
 
 const props = defineProps<{
+  index?: number
   ga: Ga
 }>()
 
