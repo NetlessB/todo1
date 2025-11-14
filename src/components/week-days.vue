@@ -35,7 +35,7 @@
           </th>
         </tr>
         <tr>
-          <td v-for="day in currentWeek" :key="day.date.toDateString()">
+          <td v-for="day in currentWeek" :key="day.date.toDateString()" style="text-wrap: pretty; width: 14.2857143%;">
             {{ day.text }}
           </td>
         </tr>
