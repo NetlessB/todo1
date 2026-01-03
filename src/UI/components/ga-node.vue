@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Ga } from '@/stores/models/ga.model'
-import { usePendingGa } from '@/stores/pendingGa'
+import type { Ga } from '@/stores/OLD/models/ga.model'
+import { usePendingGa } from '@/stores/OLD/pendingGa'
 
 const props = defineProps<{
   index?: number

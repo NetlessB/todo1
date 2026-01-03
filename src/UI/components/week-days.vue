@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useWeekStore } from '@/stores/weekGa'
+import { useWeekStore } from '@/stores/OLD/weekGa'
 
 const weekStore = useWeekStore()
 const today = new Date()

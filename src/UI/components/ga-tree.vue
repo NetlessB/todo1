@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import GaNodeComponent from './ga-node.vue'
-import { usePendingGa } from '@/stores/pendingGa'
+import { usePendingGa } from '@/stores/OLD/pendingGa'
 
 const pendingGa = usePendingGa()
 const loadingPendingGa = ref<boolean>(false)
